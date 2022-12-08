@@ -79,6 +79,9 @@
 ## RPC
 
 - [hyperf/json-rpc](https://github.com/hyperf/json-rpc) Hyperf 官方提供的 JSON-RPC 協議元件
+- [hyperf/rpc-multiplex](https://github.com/hyperf/rpc-multiplex) Hyperf 官方提供的多路複用 RPC 元件
+- [hyperf/roc](https://github.com/hyperf/roc) Hyperf 官方提供的 Golang 版本的多路複用 RPC Server 元件
+- [limingxinleo/roc-skeleton](https://github.com/limingxinleo/roc-skeleton) Golang 版本多路複用 RPC Server 骨架包
 
 ## 服務治理
 
@@ -99,6 +102,7 @@
 ## 文件生成
 
 - [hyperf/swagger](https://github.com/hyperf/swagger) Hyperf 官方提供的 Swagger 文件自動生成元件 (beta)
+- [tangwei/swagger](https://github.com/tw2066/api-docs) 一個基於 PHP 型別(DTO)自動生成 swagger 文件元件，啟動自動掃描、自動生成路由(UI)、註解驗證
 
 ## Graphql
 
@@ -140,10 +144,16 @@
 
 - [lysice/hyperf-redis-lock](https://github.com/Lysice/hyperf-redis-lock) 根據 Laravel 的 lock 元件改寫，適配於 Hyperf 框架。
 
+## 分散式事務
+
+- [dtm-php/dtm-client](https://github.com/dtm-php/dtm-client) 支援 Hyperf 的 dtm 分散式事務客戶端元件
+
 ## 第三方 SDK
 
 - [yurunsoft/pay-sdk](https://github.com/Yurunsoft/PaySDK) 支援 Swoole 協程的支付寶/微信支付 SDK
 - [yurunsoft/yurun-oauth-login](https://github.com/Yurunsoft/YurunOAuthLogin) 支援 Swoole 協程的第三方登入授權 SDK（QQ、微信、微博、Github、Gitee 等）
-- [overtrue/wechat](zh-tw/sdks/wechat) EasyWeChat，一個流行的非官方微信 SDK
+- [w7corp/wechat](zh-tw/sdks/wechat) EasyWeChat，一個流行的非官方微信 SDK
 - [Yurunsoft/PHPMailer-Swoole](https://github.com/Yurunsoft/PHPMailer-Swoole) Swoole 協程環境下的可用的 PHPMailer
 - [yansongda/hyperf-pay](https://github.com/yansongda/hyperf-pay) 支援 `支付寶/微信` 的支付元件，基於 [yansongda/pay](https://github.com/yansongda/pay) 實現，適配於 `Hyperf` 框架。
+- [alapi/hyperf-meilisearch](https://github.com/anhao/hyperf-meilisearch) 為 Hyperf Scout 提供的 meilisearch 客戶端
+- [vinchan/message-notify](https://github.com/VinchanGit/message-notify) Hyperf 異常監控報警通知元件(釘釘群機器人、飛書群機器人、郵件、QQ 頻道機器人、企業微信群機器人)

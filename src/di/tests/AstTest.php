@@ -22,6 +22,8 @@ use HyperfTest\Di\Stub\Ast\BarAspect;
 use HyperfTest\Di\Stub\Ast\BarInterface;
 use HyperfTest\Di\Stub\Ast\Foo;
 use HyperfTest\Di\Stub\Ast\FooTrait;
+use HyperfTest\Di\Stub\FooEnumStruct;
+use HyperfTest\Di\Stub\Par2;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -60,6 +62,51 @@ class Foo
     use \Hyperf\Di\Aop\ProxyTrait;
     use \Hyperf\Di\Aop\PropertyHandlerTrait;
     function __construct()
+    {
+        $this->__handlePropertyHandler(__CLASS__);
+    }
+}', $code);
+    }
+
+    public function testParentWith()
+    {
+        $ast = new Ast();
+        $code = $ast->proxy(Par2::class);
+
+        $this->assertSame($this->license . '
+namespace HyperfTest\Di\Stub;
+
+class Par2 extends Par
+{
+    use \Hyperf\Di\Aop\ProxyTrait;
+    use \Hyperf\Di\Aop\PropertyHandlerTrait;
+    function __construct(?\HyperfTest\Di\Stub\Foo $foo)
+    {
+        if (method_exists(parent::class, \'__construct\')) {
+            parent::__construct(...func_get_args());
+        }
+        $this->__handlePropertyHandler(__CLASS__);
+    }
+}', $code);
+    }
+
+    public function testAstProxyForEnum()
+    {
+        if (PHP_VERSION_ID < 80100) {
+            $this->markTestSkipped('The version below 8.1 does not support enum.');
+        }
+
+        $ast = new Ast();
+        $code = $ast->proxy(FooEnumStruct::class);
+
+        $this->assertEquals($this->license . '
+namespace HyperfTest\Di\Stub;
+
+class FooEnumStruct
+{
+    use \Hyperf\Di\Aop\ProxyTrait;
+    use \Hyperf\Di\Aop\PropertyHandlerTrait;
+    public function __construct(public FooEnum $enum = FooEnum::DEFAULT)
     {
         $this->__handlePropertyHandler(__CLASS__);
     }
@@ -238,7 +285,7 @@ trait FooTrait
     {
         $__function__ = __FUNCTION__;
         $__method__ = __METHOD__;
-        return self::__proxyCall(__TRAIT__, __FUNCTION__, self::__getParamsMap(__CLASS__, __FUNCTION__, func_get_args()), function () use($__function__, $__method__) {
+        return self::__proxyCall(__TRAIT__, __FUNCTION__, self::__getParamsMap(__TRAIT__, __FUNCTION__, func_get_args()), function () use($__function__, $__method__) {
             return uniqid();
         });
     }
@@ -253,7 +300,7 @@ trait FooTrait
     {
         $__function__ = __FUNCTION__;
         $__method__ = __METHOD__;
-        return self::__proxyCall(__TRAIT__, __FUNCTION__, self::__getParamsMap(__CLASS__, __FUNCTION__, func_get_args()), function () use($__function__, $__method__) {
+        return self::__proxyCall(__TRAIT__, __FUNCTION__, self::__getParamsMap(__TRAIT__, __FUNCTION__, func_get_args()), function () use($__function__, $__method__) {
             return uniqid();
         });
     }
